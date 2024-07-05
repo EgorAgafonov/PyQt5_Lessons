@@ -11,39 +11,44 @@ class MainWindow(qtw.QMainWindow):
 
         # Main window (one)
         self.setWindowTitle('Практика')
-        self.setGeometry(960, 440, 500, 250)
+        self.setGeometry(1300, 250, 315, 120)
 
         # Result field
         self.result_field = qtw.QLineEdit(self)
         self.result_field.setReadOnly(True)
-        self.result_field.move(150, 50)
-        self.result_field.setFixedWidth(200)
+        self.result_field.move(5, 50)
+        self.result_field.setFixedWidth(305)
 
         # Text object
         self.main_text = qtw.QLabel(self)
         self.main_text.setText('Тестовая надпись в основном окне')
-        self.main_text.move(150, 20)
+        self.main_text.move(5, 20)
         self.main_text.adjustSize()
 
         # Result button object
         self.btn_res = qtw.QPushButton(self)
-        self.btn_res.move(100, 90)
-        self.btn_res.setText('Укажите логин и пароль \nпользователя')
-        self.btn_res.setFixedWidth(200)
+        self.btn_res.move(5, 85)
+        self.btn_res.setText('ENTER')
+        self.btn_res.setFixedWidth(150)
         self.btn_res.clicked.connect(self._show_result)
 
         # Clear button object
         self.btn_clr = qtw.QPushButton(self)
-        self.btn_res.move(150, 90)
-        self.btn_res.setText('Очистить поле вывода')
-        self.btn_res.setFixedWidth(200)
-        self.btn_res.clicked.connect(self._show_result)
+        self.btn_clr.move(160, 85)
+        self.btn_clr.setText('CLEAR')
+        self.btn_clr.setFixedWidth(150)
+        self.btn_clr.clicked.connect(self._clear_result)
 
     def _show_result(self):
         """"""
 
         result = "Данные отсутствуют"
         self.result_field.setText(result)
+
+    def _clear_result(self):
+        """"""
+
+        self.result_field.clear()
 
 
 
