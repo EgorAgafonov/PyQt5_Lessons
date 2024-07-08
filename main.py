@@ -1,106 +1,141 @@
-from PyQt5 import QtWidgets as qtw
+from PyQt5 import QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
 
 
-class MainWindow(qtw.QWidget):
-    """Основной класс калькулятора с """
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.setEnabled(True)
+        MainWindow.resize(300, 400)
+        MainWindow.setAutoFillBackground(False)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
 
-    def __init__(self):
-        super().__init__()
-        self.result_field = qtw.QLineEdit()
+        self.btn_enter = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_enter.setGeometry(QtCore.QRect(140, 320, 161, 80))
+        self.btn_enter.setStyleSheet("background-color: rgb(5, 185, 194);\n"
+                                     "color: rgb(255, 255, 255);\n"
+                                     "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.btn_enter.setAutoDefault(False)
+        self.btn_enter.setFlat(False)
+        self.btn_enter.setObjectName("btn_enter")
+        self.btn_0 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_0.setGeometry(QtCore.QRect(-10, 320, 151, 80))
+        self.btn_0.setStyleSheet("background-color: rgb(5, 185, 194);\n"
+                                 "color: rgb(255, 255, 255);\n"
+                                 "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.btn_0.setAutoDefault(False)
+        self.btn_0.setFlat(False)
+        self.btn_0.setObjectName("btn_0")
+        self.btn_7 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_7.setGeometry(QtCore.QRect(0, 240, 101, 80))
+        self.btn_7.setStyleSheet("background-color: rgb(5, 185, 194);\n"
+                                 "color: rgb(255, 255, 255);\n"
+                                 "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.btn_7.setAutoDefault(False)
+        self.btn_7.setFlat(False)
+        self.btn_7.setObjectName("btn_7")
+        self.btn_8 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_8.setGeometry(QtCore.QRect(100, 240, 101, 80))
+        self.btn_8.setStyleSheet("background-color: rgb(5, 185, 194);\n"
+                                 "color: rgb(255, 255, 255);\n"
+                                 "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.btn_8.setAutoDefault(False)
+        self.btn_8.setFlat(False)
+        self.btn_8.setObjectName("btn_8")
+        self.btn_9 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_9.setGeometry(QtCore.QRect(200, 240, 111, 80))
+        self.btn_9.setStyleSheet("background-color: rgb(5, 185, 194);\n"
+                                 "color: rgb(255, 255, 255);\n"
+                                 "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.btn_9.setAutoDefault(False)
+        self.btn_9.setFlat(False)
+        self.btn_9.setObjectName("btn_9")
+        self.btn_6 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_6.setGeometry(QtCore.QRect(200, 160, 111, 80))
+        self.btn_6.setStyleSheet("background-color: rgb(5, 185, 194);\n"
+                                 "color: rgb(255, 255, 255);\n"
+                                 "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.btn_6.setAutoDefault(False)
+        self.btn_6.setFlat(False)
+        self.btn_6.setObjectName("btn_6")
+        self.btn_4 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_4.setGeometry(QtCore.QRect(0, 160, 101, 80))
+        self.btn_4.setStyleSheet("background-color: rgb(5, 185, 194);\n"
+                                 "color: rgb(255, 255, 255);\n"
+                                 "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.btn_4.setAutoDefault(False)
+        self.btn_4.setFlat(False)
+        self.btn_4.setObjectName("btn_4")
+        self.btn_5 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_5.setGeometry(QtCore.QRect(100, 160, 101, 80))
+        self.btn_5.setStyleSheet("background-color: rgb(5, 185, 194);\n"
+                                 "color: rgb(255, 255, 255);\n"
+                                 "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.btn_5.setAutoDefault(False)
+        self.btn_5.setFlat(False)
+        self.btn_5.setObjectName("btn_5")
+        self.btn_1 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_1.setGeometry(QtCore.QRect(0, 80, 101, 80))
+        self.btn_1.setStyleSheet("background-color: rgb(5, 185, 194);\n"
+                                 "color: rgb(255, 255, 255);\n"
+                                 "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.btn_1.setAutoDefault(False)
+        self.btn_1.setFlat(False)
+        self.btn_1.setObjectName("btn_1")
+        self.btn_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_2.setGeometry(QtCore.QRect(100, 80, 101, 80))
+        self.btn_2.setStyleSheet("background-color: rgb(5, 185, 194);\n"
+                                 "color: rgb(255, 255, 255);\n"
+                                 "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.btn_2.setAutoDefault(False)
+        self.btn_2.setFlat(False)
+        self.btn_2.setObjectName("btn_2")
+        self.btn_3 = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_3.setGeometry(QtCore.QRect(200, 80, 111, 80))
+        self.btn_3.setStyleSheet("background-color: rgb(5, 185, 194);\n"
+                                 "color: rgb(255, 255, 255);\n"
+                                 "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.btn_3.setAutoDefault(False)
+        self.btn_3.setFlat(False)
+        self.btn_3.setObjectName("btn_3")
+        self.result_field = QtWidgets.QLineEdit(self.centralwidget)
+        self.result_field.setGeometry(QtCore.QRect(0, -1, 301, 81))
+        self.result_field.setStyleSheet("background-color: rgb(91, 91, 91);\n"
+                                        "color: rgb(255, 255, 255);\n"
+                                        "font: 24pt \"Tw Cen MT Condensed Extra Bold\";")
+        self.result_field.setInputMask("")
+        self.result_field.setFrame(True)
+        self.result_field.setEchoMode(QtWidgets.QLineEdit.Normal)
         self.result_field.setReadOnly(True)
-        self.result_field.setStyleSheet("color: white;  background-color: black")
-        self.setWindowTitle('Калькулятор')
-        self.setLayout(qtw.QVBoxLayout())
-        self.layout().addWidget(qtw.QWidget())
-        self.keypad()
-        self.temp_nums = []
-        self.fin_nums = []
-        self.show()
+        self.result_field.setObjectName("result_field")
+        MainWindow.setCentralWidget(self.centralwidget)
 
-    def keypad(self):
-        """Создание кнопок калькулятора и сетки для их размещения внутри MainWindow """
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        container = qtw.QWidget()
-        container.setLayout(qtw.QGridLayout())
-        container.setStyleSheet("color: black;  background-color: teal")
-        # Create buttons objects
-        btn_result = qtw.QPushButton('ВВОД', clicked=self.func_result)
-        btn_clear = qtw.QPushButton('СБРОС', clicked=self.clear_calc)
-        btn_9 = qtw.QPushButton('9', clicked=lambda: self.num_press('9'))
-        btn_8 = qtw.QPushButton('8', clicked=lambda: self.num_press('8'))
-        btn_7 = qtw.QPushButton('7', clicked=lambda: self.num_press('7'))
-        btn_6 = qtw.QPushButton('6', clicked=lambda: self.num_press('6'))
-        btn_5 = qtw.QPushButton('5', clicked=lambda: self.num_press('5'))
-        btn_4 = qtw.QPushButton('4', clicked=lambda: self.num_press('4'))
-        btn_3 = qtw.QPushButton('3', clicked=lambda: self.num_press('3'))
-        btn_2 = qtw.QPushButton('2', clicked=lambda: self.num_press('2'))
-        btn_1 = qtw.QPushButton('1', clicked=lambda: self.num_press('1'))
-        btn_0 = qtw.QPushButton('0', clicked=lambda: self.num_press('0'))
-        btn_plus = qtw.QPushButton('+', clicked=lambda: self.func_press('+'))
-        btn_mins = qtw.QPushButton('-', clicked=lambda: self.func_press('-'))
-        btn_mult = qtw.QPushButton('*', clicked=lambda: self.func_press('*'))
-        btn_divd = qtw.QPushButton('÷', clicked=lambda: self.func_press('/'))
-
-        # Adding buttons(widgets) to the layout
-        container.layout().addWidget(self.result_field, 0, 0, 1, 4, )
-        container.layout().addWidget(btn_result, 1, 0, 1, 2)
-        container.layout().addWidget(btn_clear, 1, 2, 1, 2)
-        container.layout().addWidget(btn_9, 2, 0)
-        container.layout().addWidget(btn_8, 2, 1)
-        container.layout().addWidget(btn_7, 2, 2)
-        container.layout().addWidget(btn_plus, 2, 3)
-        container.layout().addWidget(btn_6, 3, 0)
-        container.layout().addWidget(btn_5, 3, 1)
-        container.layout().addWidget(btn_4, 3, 2)
-        container.layout().addWidget(btn_mins, 3, 3)
-        container.layout().addWidget(btn_3, 4, 0)
-        container.layout().addWidget(btn_2, 4, 1)
-        container.layout().addWidget(btn_1, 4, 2)
-        container.layout().addWidget(btn_mult, 4, 3)
-        container.layout().addWidget(btn_0, 5, 0, 1, 3)
-        container.layout().addWidget(btn_divd, 5, 3)
-        self.layout().addWidget(container)
-
-    def num_press(self, key_number):
-        """Метод обработки числовых символов калькулятора"""
-
-        self.temp_nums.append(key_number)  # добавление в список строкового значения числа, "указанного на кнопке"
-        temp_string = ''.join(self.temp_nums)  # создание переменной содержащей одну объединенную строку из элементов
-        # списка self.temp_nums
-        if self.fin_nums:
-            self.result_field.setText(''.join(self.fin_nums) + temp_string)
-        else:
-            self.result_field.setText(temp_string)
-
-    def func_press(self, operator):
-        """Метод обработки знаков операторов числовых выражений калькулятора"""
-
-        temp_string = ''.join(self.temp_nums)
-        self.fin_nums.append(temp_string)
-        self.fin_nums.append(operator)
-        self.temp_nums = []
-        self.result_field.setText(''.join(self.fin_nums))
-
-    def func_result(self):
-        """Метод для расчета результата числового выражения калькулятора"""
-
-        fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
-        result_string = eval(fin_string)
-        fin_string += '='
-        fin_string += str(result_string)
-        self.result_field.setText(fin_string)
-
-    def clear_calc(self):
-        """Метод для очистки поля ввода калькулятора(удаляет из него все символы)"""
-
-        self.result_field.clear()
-        self.temp_nums = []
-        self.fin_nums = []
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "Тестовый проект"))
+        self.btn_enter.setText(_translate("MainWindow", "="))
+        self.btn_0.setText(_translate("MainWindow", "0"))
+        self.btn_7.setText(_translate("MainWindow", "7"))
+        self.btn_8.setText(_translate("MainWindow", "8"))
+        self.btn_9.setText(_translate("MainWindow", "9"))
+        self.btn_6.setText(_translate("MainWindow", "6"))
+        self.btn_4.setText(_translate("MainWindow", "4"))
+        self.btn_5.setText(_translate("MainWindow", "5"))
+        self.btn_1.setText(_translate("MainWindow", "1"))
+        self.btn_2.setText(_translate("MainWindow", "2"))
+        self.btn_3.setText(_translate("MainWindow", "3"))
+        self.result_field.setText(_translate("MainWindow", " 0"))
 
 
-if __name__ == '__main__':
-    app = qtw.QApplication([])
-    mw = MainWindow()
-    app.setStyle(qtw.QStyleFactory.create("Fusion"))
-    app.exec_()
-
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())

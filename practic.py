@@ -1,10 +1,9 @@
 from PyQt5 import QtWidgets as qtw
 import sys
-import tkinter
 
 
 class MainWindow(qtw.QMainWindow):
-    """"""
+    """Класс с атрибутами и методами главного окна"""
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -18,11 +17,12 @@ class MainWindow(qtw.QMainWindow):
         self.result_field.setReadOnly(True)
         self.result_field.move(5, 50)
         self.result_field.setFixedWidth(305)
+        self.result_field.setStyleSheet("color: white;  background-color: grey")
 
         # Text object
         self.main_text = qtw.QLabel(self)
         self.main_text.setText('Тестовая надпись в основном окне')
-        self.main_text.move(5, 20)
+        self.main_text.move(80, 20)
         self.main_text.adjustSize()
 
         # Result button object
@@ -40,7 +40,7 @@ class MainWindow(qtw.QMainWindow):
         self.btn_clr.clicked.connect(self._clear_result)
 
     def _show_result(self):
-        """"""
+        """Метод для отображения текста"""
 
         result = "Данные отсутствуют"
         self.result_field.setText(result)
@@ -49,12 +49,6 @@ class MainWindow(qtw.QMainWindow):
         """"""
 
         self.result_field.clear()
-
-
-
-
-
-
 
 
 def run_application():
@@ -68,6 +62,3 @@ def run_application():
 
 
 run_application()
-
-
-
