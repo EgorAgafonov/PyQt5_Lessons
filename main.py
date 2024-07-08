@@ -133,9 +133,18 @@ class Ui_MainWindow(object):
         self.btn_0.clicked.connect(lambda: self.write_number(self.btn_0.text()))
         self.btn_1.clicked.connect(lambda: self.write_number(self.btn_1.text()))
         self.btn_2.clicked.connect(lambda: self.write_number(self.btn_2.text()))
+        self.btn_3.clicked.connect(lambda: self.write_number(self.btn_3.text()))
+        self.btn_4.clicked.connect(lambda: self.write_number(self.btn_4.text()))
+        self.btn_5.clicked.connect(lambda: self.write_number(self.btn_5.text()))
+        self.btn_6.clicked.connect(lambda: self.write_number(self.btn_6.text()))
+        self.btn_7.clicked.connect(lambda: self.write_number(self.btn_7.text()))
+        self.btn_8.clicked.connect(lambda: self.write_number(self.btn_8.text()))
+        self.btn_9.clicked.connect(lambda: self.write_number(self.btn_9.text()))
+
+
 
     def write_number(self, number):
-        self.result_field.setText(number)
+        self.result_field.setText(self.result_field.text() + number)
 
 
 
