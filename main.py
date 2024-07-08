@@ -4,6 +4,8 @@ import sys
 
 
 class Ui_MainWindow(object):
+    """"""
+
     def __init__(self):
         super().__init__()
 
@@ -14,10 +16,10 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
         MainWindow.resize(300, 400)
-        MainWindow.setAutoFillBackground(False)
+        MainWindow.setAutoFillBackground(True)
+        MainWindow.setStyleSheet(self.common_style)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-
 
         self.btn_enter = QtWidgets.QPushButton(self.centralwidget)
         self.btn_enter.setGeometry(QtCore.QRect(140, 320, 161, 80))
@@ -97,9 +99,9 @@ class Ui_MainWindow(object):
         self.btn_3.setObjectName("btn_3")
 
         self.result_field = QtWidgets.QLineEdit(self.centralwidget)
-        self.result_field.setGeometry(QtCore.QRect(0, -1, 301, 81))
+        self.result_field.setGeometry(QtCore.QRect(5, 6, 290, 70))
         self.result_field.setStyleSheet("background-color: grey; color: rgb(255, 255, 255); font: 24pt 'Tw Cen MT "
-                             "Condensed Extra Bold';")
+                             "Condensed Extra Bold'; border-radius: 10px;")
         self.result_field.setInputMask("")
         self.result_field.setFrame(True)
         self.result_field.setEchoMode(QtWidgets.QLineEdit.Normal)
@@ -109,6 +111,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.add_function()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -124,7 +127,16 @@ class Ui_MainWindow(object):
         self.btn_1.setText(_translate("MainWindow", "1"))
         self.btn_2.setText(_translate("MainWindow", "2"))
         self.btn_3.setText(_translate("MainWindow", "3"))
-        self.result_field.setText(_translate("MainWindow", " 0"))
+        self.result_field.setText(_translate("MainWindow", ""))
+
+    def add_function(self):
+        self.btn_0.clicked.connect(lambda: self.write_number(self.btn_0.text()))
+        self.btn_1.clicked.connect(lambda: self.write_number(self.btn_1.text()))
+        self.btn_2.clicked.connect(lambda: self.write_number(self.btn_2.text()))
+
+    def write_number(self, number):
+        self.result_field.setText(number)
+
 
 
 if __name__ == "__main__":
