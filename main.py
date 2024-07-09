@@ -101,7 +101,7 @@ class Ui_MainWindow(object):
         self.result_field = QtWidgets.QLineEdit(self.centralwidget)
         self.result_field.setGeometry(QtCore.QRect(5, 6, 290, 70))
         self.result_field.setStyleSheet("background-color: grey; color: rgb(255, 255, 255); font: 24pt 'Tw Cen MT "
-                             "Condensed Extra Bold'; border-radius: 10px;")
+                             "Condensed Extra Bold'; border-radius: 15px;")
         self.result_field.setInputMask("")
         self.result_field.setFrame(True)
         self.result_field.setEchoMode(QtWidgets.QLineEdit.Normal)
@@ -141,15 +141,13 @@ class Ui_MainWindow(object):
         self.btn_8.clicked.connect(lambda: self.write_number(self.btn_8.text()))
         self.btn_9.clicked.connect(lambda: self.write_number(self.btn_9.text()))
 
-
-
     def write_number(self, number):
         self.result_field.setText(self.result_field.text() + number)
 
 
-
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyle(QtWidgets.QStyleFactory.create("fusion"))
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
