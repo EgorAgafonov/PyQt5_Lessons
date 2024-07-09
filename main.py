@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMenuBar, QMenu
 import sys
 
@@ -26,8 +26,13 @@ class MainWindow(QMainWindow):
         self.menuBar.addMenu(file_tab)
 
         # Добавляем опцию "Открыть" во вкладке "Файл" основного меню:
-        file_tab_open = file_tab.addMenu('&Открыть')
-        file_tab_save = file_tab.addMenu('&Сохранить')
+        file_tab.addAction('Открыть', self.action_clicked)
+        file_tab.addAction('Сохранить', self.action_clicked)
+
+    @QtCore.pyqtSlot()
+    def action_clicked(self):
+        action = self.sender()
+        print(action.text())
 
 
 def application():
