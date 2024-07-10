@@ -1,11 +1,11 @@
 from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMenuBar, QMenu
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMenuBar, QMenu, QFileDialog
 import sys
 
 
 class MainWindow(QMainWindow):
     """"""
-    
+
     def __init__(self):
         super(MainWindow, self).__init__()
 
@@ -31,11 +31,28 @@ class MainWindow(QMainWindow):
 
     @QtCore.pyqtSlot()
     def action_clicked(self):
+        """"""
+
         action = self.sender()
+
         if action.text() == 'Открыть':
-            self.text_edit.setText("Файл открыт")
+            fname = QFileDialog.getOpenFileName(self)[0]
+            try:
+                with open(fname, 'r', encoding='utf-8') as f:
+                    data = f.read()
+                    self.text_edit.setText(data)
+            except FileNotFoundError:
+                print("Файл не выбран.")
+
         elif action.text() == 'Сохранить':
-            self.text_edit.setText("Файл сохранен")
+            fname = QFileDialog.getSaveFileName(self)[0]
+            try:
+                with open(fname, 'w', encoding='utf-8') as f:
+                    text = self.text_edit.toPlainText()
+                    f.write(text)
+            except FileNotFoundError:
+                print("Файл не выбран.")
+
         else:
             pass
 
@@ -52,5 +69,3 @@ def application():
 
 if __name__ == "__main__":
     application()
-
-
