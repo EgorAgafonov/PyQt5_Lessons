@@ -32,7 +32,12 @@ class MainWindow(QMainWindow):
     @QtCore.pyqtSlot()
     def action_clicked(self):
         action = self.sender()
-        print(action.text())
+        if action.text() == 'Открыть':
+            self.text_edit.setText("Файл открыт")
+        elif action.text() == 'Сохранить':
+            self.text_edit.setText("Файл сохранен")
+        else:
+            pass
 
 
 def application():
