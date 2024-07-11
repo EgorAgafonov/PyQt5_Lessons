@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
-import requests
-import json
+from api import PetFriends
+
 
 
 class Ui_main_window(object):
@@ -29,7 +29,7 @@ class Ui_main_window(object):
 "font: 8pt \"Arial\";")
         self.result_field.setFrameShape(QtWidgets.QFrame.WinPanel)
         self.result_field.setFrameShadow(QtWidgets.QFrame.Sunken)
-        # self.result_field.setReadOnly(True)
+        self.result_field.setReadOnly(True)
         self.result_field.setObjectName("result_field")
         self.label = QtWidgets.QLabel(self.get_tab)
         self.label.setGeometry(QtCore.QRect(10, 10, 261, 21))
@@ -134,16 +134,8 @@ class Ui_main_window(object):
         path = self.path_input_field.text()
         token = self.header_input_field.text()
         filter = self.filter_input_field.text()
-
-        headers = {'auth_key': token}
-        filter = {'filter': filter}
-        res = requests.get(url + path, headers=headers, params=filter)
-        status = res.status_code
-        result = ""
-        try:
-            result = res.json()
-        except json.decoder.JSONDecodeError:
-            result = res.text
+        pf = PetFriends()
+        status, result = pf.get_list_of_pets(url=url, token=token, path=path, filter=filter)
         text = f'Status: {status}\nResult:\n{result}'
         self.result_field.setText(text)
 
