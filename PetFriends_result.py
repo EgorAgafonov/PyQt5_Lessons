@@ -1,8 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import requests
+import json
+
 
 class Ui_main_window(object):
+
     def setupUi(self, main_window):
         main_window.setObjectName("main_window")
         main_window.resize(600, 330)
@@ -26,7 +29,7 @@ class Ui_main_window(object):
 "font: 8pt \"Arial\";")
         self.result_field.setFrameShape(QtWidgets.QFrame.WinPanel)
         self.result_field.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.result_field.setReadOnly(True)
+        # self.result_field.setReadOnly(True)
         self.result_field.setObjectName("result_field")
         self.label = QtWidgets.QLabel(self.get_tab)
         self.label.setGeometry(QtCore.QRect(10, 10, 261, 21))
@@ -102,6 +105,7 @@ class Ui_main_window(object):
         self.retranslateUi(main_window)
         self.post_tab.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(main_window)
+        self.add_btn_function()
 
     def retranslateUi(self, main_window):
         _translate = QtCore.QCoreApplication.translate
@@ -112,17 +116,24 @@ class Ui_main_window(object):
         self.header_label.setText(_translate("main_window", "Header:"))
         self.filter_label.setText(_translate("main_window", " Filter:"))
         self.send_btn.setText(_translate("main_window", "SEND"))
+
         self.clear_btn.setText(_translate("main_window", "CLEAR"))
         self.post_tab.setTabText(self.post_tab.indexOf(self.get_tab), _translate("main_window", "GET"))
         self.post_tab.setTabText(self.post_tab.indexOf(self.post_tab1), _translate("main_window", "POST"))
 
-    def get_pet_list(self):
+    def add_btn_function(self):
         """"""
 
-        url = str(self.url_input_field.text())
-        path = str(self.path_input_field.text())
-        token = str(self.header_input_field.text())
-        filter = str(self.filter_input_field.text())
+        self.send_btn.clicked.connect(self.get_my_pet_list)
+        self.clear_btn.clicked.connect(self.clear_result_field)
+
+    def get_my_pet_list(self):
+        """"""
+
+        url = self.url_input_field.text()
+        path = self.path_input_field.text()
+        token = self.header_input_field.text()
+        filter = self.filter_input_field.text()
 
         headers = {'auth_key': token}
         filter = {'filter': filter}
@@ -133,14 +144,19 @@ class Ui_main_window(object):
             result = res.json()
         except json.decoder.JSONDecodeError:
             result = res.text
+        text = f'Status: {status}\nResult:\n{result}'
+        self.result_field.setText(text)
 
-        text =
+    def clear_result_field(self):
+        """"""
+
+        self.result_field.clear()
 
 
 if __name__ == "__main__":
-
     app = QtWidgets.QApplication(sys.argv)
     main_window = QtWidgets.QMainWindow()
+    app.setStyle(QtWidgets.QStyleFactory.create("Fusion"))
     ui = Ui_main_window()
     ui.setupUi(main_window)
     main_window.show()
