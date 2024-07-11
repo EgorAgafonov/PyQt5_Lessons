@@ -1,7 +1,6 @@
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import sys
+import requests
 
 class Ui_main_window(object):
     def setupUi(self, main_window):
@@ -117,9 +116,29 @@ class Ui_main_window(object):
         self.post_tab.setTabText(self.post_tab.indexOf(self.get_tab), _translate("main_window", "GET"))
         self.post_tab.setTabText(self.post_tab.indexOf(self.post_tab1), _translate("main_window", "POST"))
 
+    def get_pet_list(self):
+        """"""
+
+        url = str(self.url_input_field.text())
+        path = str(self.path_input_field.text())
+        token = str(self.header_input_field.text())
+        filter = str(self.filter_input_field.text())
+
+        headers = {'auth_key': token}
+        filter = {'filter': filter}
+        res = requests.get(url + path, headers=headers, params=filter)
+        status = res.status_code
+        result = ""
+        try:
+            result = res.json()
+        except json.decoder.JSONDecodeError:
+            result = res.text
+
+        text =
+
 
 if __name__ == "__main__":
-    import sys
+
     app = QtWidgets.QApplication(sys.argv)
     main_window = QtWidgets.QMainWindow()
     ui = Ui_main_window()
