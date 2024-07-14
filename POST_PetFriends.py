@@ -1,12 +1,12 @@
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMenuBar, QMenu, QFileDialog
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from api import PetFriends
-import sys
 
 
-class MainWindow(object):
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Ui_mw(object):
     def setupUi(self, mw):
         mw.setObjectName("mw")
         mw.resize(790, 580)
@@ -153,7 +153,7 @@ class MainWindow(object):
 "background-color: rgb(0, 85, 127);")
         self.clear_res_btn.setObjectName("clear_res_btn")
         mw.setCentralWidget(self.centralwidget)
-        self.add_actions_btn()
+
         self.retranslateUi(mw)
         QtCore.QMetaObject.connectSlotsByName(mw)
 
@@ -174,15 +174,12 @@ class MainWindow(object):
         self.petphoto_label.setText(_translate("mw", "Pet photo:"))
         self.clear_res_btn.setText(_translate("mw", "CLEAR RESULT"))
 
-    def add_actions_btn(self):
-
-
 
 if __name__ == "__main__":
+    import sys
     app = QtWidgets.QApplication(sys.argv)
-    main_window = QtWidgets.QMainWindow()
-    app.setStyle(QtWidgets.QStyleFactory.create("Fusion"))
-    ui = MainWindow()
-    ui.setupUi(main_window)
-    main_window.show()
+    mw = QtWidgets.QMainWindow()
+    ui = Ui_mw()
+    ui.setupUi(mw)
+    mw.show()
     sys.exit(app.exec_())
