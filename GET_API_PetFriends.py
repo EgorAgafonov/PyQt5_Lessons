@@ -3,7 +3,6 @@ import sys
 from api import PetFriends
 
 
-
 class Ui_main_window(object):
 
     def setupUi(self, main_window):
@@ -116,7 +115,6 @@ class Ui_main_window(object):
         self.header_label.setText(_translate("main_window", "Header:"))
         self.filter_label.setText(_translate("main_window", " Filter:"))
         self.send_btn.setText(_translate("main_window", "SEND"))
-
         self.clear_btn.setText(_translate("main_window", "CLEAR"))
         self.post_tab.setTabText(self.post_tab.indexOf(self.get_tab), _translate("main_window", "GET"))
         self.post_tab.setTabText(self.post_tab.indexOf(self.post_tab1), _translate("main_window", "POST"))
