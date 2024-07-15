@@ -156,8 +156,8 @@ class MainWindow(object):
         self.clear_res_btn.setObjectName("clear_res_btn")
         mw.setCentralWidget(self.centralwidget)
         self.add_actions_btn()
-        self.clipboard = QtWidgets.QApplication.clipboard()
-        self.clipboard.setImage(QtGui.QImage())
+        # self.clipboard = QtWidgets.QApplication.clipboard()
+        # self.clipboard.setImage(QtGui.QImage())
         self.retranslateUi(mw)
         QtCore.QMetaObject.connectSlotsByName(mw)
 
@@ -187,16 +187,15 @@ class MainWindow(object):
 
     def select_photo(self):
 
-        action = self.sender()
-
-        if action.text() == 'SELECT..':
-            fname = QFileDialog.getOpenFileName(self)[0]
-            try:
-                with open(fname, 'rb') as f:
-                    print(os.path.dirname(f))
-
-            except FileNotFoundError:
-                print("Файл не выбран.")
+        fname = QFileDialog.getOpenFileName()[0]
+        try:
+            with open(fname, 'rb') as f:
+                data = f.name
+                self.photo_field.setPlainText(data)
+        except FileNotFoundError:
+            print("Файл не выбран.")
+        else:
+            return data
 
     # def send_request(self):
     #
