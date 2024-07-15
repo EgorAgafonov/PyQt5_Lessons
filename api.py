@@ -22,42 +22,42 @@ class PetFriends:
             result = res.text
         return status, result
 
-    def create_pet_simple(self, auth_key: json, name: str, animal_type: str, age: float) -> json:
-        """Метод отправляет на сервер базовую информацию о добавляемом питомце без фотографии.
-        Возвращает код состояния ответа на запрос и данные добавленного питомца в формате JSON."""
+    def add_new_pet(self, url: str, token: str, path: str ) -> json:
+        """Метод посредством POST запроса отправляет на сервер полные данные о добавляемом питомце, включая фото,
+        а также возвращает статус запроса на сервер (код состояния ответа) и результат в формате JSON с данными
+        добавленного питомца."""
 
-        headers = {'auth_key': auth_key['key']}
-        data = {'name': name, 'animal_type': animal_type, 'age': age}
-        res = requests.post(self.base_url + 'api/create_pet_simple', headers=headers, data=data)
+        data = MultipartEncoder(
+            fields={
+                'name': name,
+                'animal_type': animal_type,
+                'age': age,
+                'pet_photo': (pet_photo, open(pet_photo, 'rb'), 'image/jpeg')
+            })
+        headers = {'auth_key': token, 'Content-Type': data.content_type}
+        res = requests.post(url + path, headers=headers, data=data)
         status = res.status_code
         result = ""
         try:
             result = res.json()
         except json.decoder.JSONDecodeError:
             result = res.text
+        print(result)
         return status, result
+
+    # def create_pet_simple(self, auth_key: json, name: str, animal_type: str, age: float) -> json:
+    #     """Метод отправляет на сервер базовую информацию о добавляемом питомце без фотографии.
+    #     Возвращает код состояния ответа на запрос и данные добавленного питомца в формате JSON."""
     #
-    # def add_new_pet(self, auth_key: json, name: str, animal_type: str, age: str, pet_photo: str) -> json:
-    #     """Метод посредством POST запроса отправляет на сервер полные данные о добавляемом питомце, включая фото,
-    #     а также возвращает статус запроса на сервер (код состояния ответа) и результат в формате JSON с данными
-    #     добавленного питомца."""
-    #
-    #     data = MultipartEncoder(
-    #         fields={
-    #             'name': name,
-    #             'animal_type': animal_type,
-    #             'age': age,
-    #             'pet_photo': (pet_photo, open(pet_photo, 'rb'), 'image/jpeg')
-    #         })
-    #     headers = {'auth_key': auth_key['key'], 'Content-Type': data.content_type}
-    #     res = requests.post(self.base_url + 'api/pets', headers=headers, data=data)
+    #     headers = {'auth_key': auth_key['key']}
+    #     data = {'name': name, 'animal_type': animal_type, 'age': age}
+    #     res = requests.post(self.base_url + 'api/create_pet_simple', headers=headers, data=data)
     #     status = res.status_code
     #     result = ""
     #     try:
     #         result = res.json()
     #     except json.decoder.JSONDecodeError:
     #         result = res.text
-    #     print(result)
     #     return status, result
     #
     # def update_pet_foto(self, auth_key: json, pet_id: str, pet_photo: str) -> json:

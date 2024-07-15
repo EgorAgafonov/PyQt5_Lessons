@@ -197,7 +197,21 @@ class MainWindow(object):
         else:
             return data
 
-    # def send_request(self):
+    def send_request(self):
+
+        url = self.url_field.text()
+        path = self.path_field.text()
+        token = self.token_field.text()
+        name = self.name_field.text()
+        breed = self.breed_field.text()
+        age = self.age_field.text()
+        photo = self.select_photo()
+        pf = PetFriends()
+        status, result = pf.add_new_pet(token,)
+        text = f'Status: {status}\nResult:\n{result}'
+        self.result_field.setText(text)
+
+
     #
     #
     # def clear_fields(self):
