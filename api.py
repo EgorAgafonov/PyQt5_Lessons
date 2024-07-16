@@ -22,16 +22,17 @@ class PetFriends:
             result = res.text
         return status, result
 
-    def add_new_pet(self, url: str, token: str, path: str ) -> json:
+    @staticmethod
+    def add_new_pet(url: str, path: str, token: str, pet_name: str, pet_breed: str, pet_age: str, pet_photo) -> json:
         """Метод посредством POST запроса отправляет на сервер полные данные о добавляемом питомце, включая фото,
         а также возвращает статус запроса на сервер (код состояния ответа) и результат в формате JSON с данными
         добавленного питомца."""
 
         data = MultipartEncoder(
             fields={
-                'name': name,
-                'animal_type': animal_type,
-                'age': age,
+                'name': pet_name,
+                'animal_type': pet_breed,
+                'age': pet_age,
                 'pet_photo': (pet_photo, open(pet_photo, 'rb'), 'image/jpeg')
             })
         headers = {'auth_key': token, 'Content-Type': data.content_type}

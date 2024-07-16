@@ -205,9 +205,8 @@ class MainWindow(object):
         name = self.name_field.text()
         breed = self.breed_field.text()
         age = self.age_field.text()
-        photo = self.select_photo()
-        pf = PetFriends()
-        status, result = pf.add_new_pet(token,)
+
+        status, result = PetFriends.add_new_pet(url, path, token, name, breed, age, pet_photo=self.select_photo())
         text = f'Status: {status}\nResult:\n{result}'
         self.result_field.setText(text)
 
