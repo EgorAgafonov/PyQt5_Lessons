@@ -9,6 +9,9 @@ import os
 
 
 class MainWindow(object):
+    def __init__(self):
+        self.file_path = None
+
     def setupUi(self, mw):
         mw.setObjectName("mw")
         mw.resize(790, 580)
@@ -156,8 +159,6 @@ class MainWindow(object):
         self.clear_res_btn.setObjectName("clear_res_btn")
         mw.setCentralWidget(self.centralwidget)
         self.add_actions_btn()
-        # self.clipboard = QtWidgets.QApplication.clipboard()
-        # self.clipboard.setImage(QtGui.QImage())
         self.retranslateUi(mw)
         QtCore.QMetaObject.connectSlotsByName(mw)
 
@@ -192,10 +193,9 @@ class MainWindow(object):
             with open(fname, 'rb') as f:
                 data = f.name
                 self.photo_field.setPlainText(data)
+                self.file_path = os.path.dirname(data)
         except FileNotFoundError:
             print("Файл не выбран.")
-        else:
-            return data
 
     def send_request(self):
 
@@ -205,8 +205,7 @@ class MainWindow(object):
         name = self.name_field.text()
         breed = self.breed_field.text()
         age = self.age_field.text()
-
-        status, result = PetFriends.add_new_pet(url, path, token, name, breed, age, pet_photo=self.select_photo())
+        status, result = PetFriends.add_new_pet(url, path, token, name, breed, age, pet_photo=self.file_path)
         text = f'Status: {status}\nResult:\n{result}'
         self.result_field.setText(text)
 
