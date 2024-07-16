@@ -183,8 +183,8 @@ class MainWindow(object):
 
     def add_actions_btn(self):
         self.select_btn.clicked.connect(self.select_photo)
-        # self.send_btn.clicked.connect(self.send_request)
-        # self.clear_res_btn.clicked.connect(self.clear_fields)
+        self.send_btn.clicked.connect(self.send_request)
+        self.clear_res_btn.clicked.connect(self.clear_fields)
 
     def select_photo(self):
 
@@ -193,7 +193,7 @@ class MainWindow(object):
             with open(fname, 'rb') as f:
                 data = f.name
                 self.photo_field.setPlainText(data)
-                self.file_path = os.path.dirname(data)
+                self.file_path = os.path.abspath(data)
         except FileNotFoundError:
             print("Файл не выбран.")
 
@@ -209,12 +209,9 @@ class MainWindow(object):
         text = f'Status: {status}\nResult:\n{result}'
         self.result_field.setText(text)
 
-
-    #
-    #
-    # def clear_fields(self):
-    #     self.result_field.clear()
-    #     self.response_field.clear()
+    def clear_fields(self):
+        self.result_field.clear()
+        self.response_field.clear()
 
 
 if __name__ == "__main__":
