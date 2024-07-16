@@ -9,6 +9,7 @@ import os
 
 
 class MainWindow(object):
+
     def __init__(self):
         self.file_path = None
 
@@ -61,7 +62,6 @@ class MainWindow(object):
         self.token_field.setStyleSheet("background-color: rgb(255, 255, 255);\n"
                                        "font: 8pt \"MS Shell Dlg 2\";")
         self.token_field.setFrameShape(QtWidgets.QFrame.WinPanel)
-        self.token_field.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.token_field.setObjectName("token_field")
         self.token_label = QtWidgets.QLabel(self.centralwidget)
         self.token_label.setGeometry(QtCore.QRect(410, 120, 41, 21))
@@ -187,25 +187,21 @@ class MainWindow(object):
         self.clear_res_btn.clicked.connect(self.clear_fields)
 
     def select_photo(self):
-
         fname = QFileDialog.getOpenFileName()[0]
-        try:
-            with open(fname, 'rb') as f:
-                data = f.name
-                self.photo_field.setPlainText(data)
-                self.file_path = os.path.abspath(data)
-        except FileNotFoundError:
-            print("Файл не выбран.")
+        self.photo_field.setPlainText(fname)
+        self.file_path = fname
+        self.response_field.setPlainText(fname)
 
     def send_request(self):
-
         url = self.url_field.text()
         path = self.path_field.text()
         token = self.token_field.text()
-        name = self.name_field.text()
-        breed = self.breed_field.text()
-        age = self.age_field.text()
-        status, result = PetFriends.add_new_pet(url, path, token, name, breed, age, pet_photo=self.file_path)
+        pet_name = self.name_field.text()
+        pet_breed = self.breed_field.text()
+        pet_age = self.age_field.text()
+        pf = PetFriends()
+        status, result = pf.create_pet_simple(url, path, token, pet_name, pet_breed, pet_age)
+
         text = f'Status: {status}\nResult:\n{result}'
         self.result_field.setText(text)
 
